@@ -1,0 +1,73 @@
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title data-th-text="${title}">论文答辩出题表</title>
+</head>
+
+<body data-th-each="dclrQuestion : ${dclrQuestionList}">
+<div>
+    <p style="text-align:center;"
+    ><span style="font-size:18pt; font-weight:bold"></span
+    ></p>
+    <p style="text-align:center;" data-th-text="${title}">申报高级工程师系列人员论文答辩出题表</p>
+    <p style="text-align:center;"
+    ><span style="font-size:18pt">&#xa0;</span
+    ></p>
+    <div>
+        <table border="1px" cellspacing="0" cellpadding="0"
+               style="border-collapse:collapse; width:524.1pt">
+            <tr>
+                <td>单位</td>
+                <td colspan="3" data-th-text="${dclrQuestion.orgName}">建安总部机关</td>
+                <td style="padding:0.62pt; vertical-align:middle; width:50.3pt">姓名</td>
+                <td colspan="2" data-th-text="${dclrQuestion.userName}">张三</td>
+            </tr>
+            <tr>
+                <td><p
+                ><span>&#xa0;</span></p>论文<br/>题目<br/>内容<br/>摘要<p
+                ><span>&#xa0;</span></p>
+                </td>
+                <td colspan="6" data-th-text="${dclrQuestion.paperTitleOrSummary}">选煤厂胶带输送机安装技术要点探讨</td>
+            </tr>
+            <tr>
+                <td rowspan="4">答<br/>辩<br/>题<br/>目</td>
+                <td>1</td>
+                <td colspan="5" data-th-text="${dclrQuestion.question1}">带式输送机胶带接头硫化工艺要点。</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td colspan="5" data-th-text="${dclrQuestion.question2}">带式输送机在机体中跑偏，分析原因给出解决方案？</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td colspan="5" data-th-text="${dclrQuestion.question3}">带式输送机驱动装置安装时二次灌浆工序如何进行？</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td colspan="5" data-th-text="${dclrQuestion.question4}">机驱动装置安装时二</td>
+            </tr>
+            <tr style="border: none; height: 0px; ">
+                <td style="width: 85pt"></td>
+                <td style="width: 85pt"></td>
+                <td style="width: 85pt"></td>
+                <td style="width: 85pt"></td>
+                <td style="width: 85pt"></td>
+                <td style="width: 85pt"></td>
+            </tr>
+        </table>
+    </div>
+    <p>
+        <span>&#xa0;</span>
+    </p>
+    <p
+    ><span style="font-family: 宋体; font-size: 14pt"
+    >出题专家：</span><span style="font-family: 宋体; font-size: 14pt" data-th-text="${dclrQuestion.expertName}"
+    >范强</span>
+    </p>
+</div>
+</body>
+
+</html>

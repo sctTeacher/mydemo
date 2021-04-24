@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <property name="APP_Name" value="ccerp"/>
+    <property name="normalPattern"
+        value="%d{HH:mm:ss.SSS} [%thread] [%X{sessionId}] %logger{2}:%line %-5level - %msg%n "/>
+    <property name="log.path" value="${APP_Name}"/>
+
+    <contextName>${APP_Name}</contextName>
+
+    <appender name="serverInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.path}/ccerp_evaluate.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/ccerp_evaluate.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+            <maxHistory>72</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder charset="UTF-8">
+            <pattern>${normalPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--控制台输出 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>${normalPattern}</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="AsyncServerInfo" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>50000</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="serverInfo"/>
+    </appender>
+
+
+    <appender name="fitnessError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.path}/ccerp_evaluate_error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/ccerp_evaluate_error.%d{yyyy-MM-dd-HH}.log
+            </fileNamePattern>
+            <maxHistory>72</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder charset="UTF-8">
+            <pattern>${normalPattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <appender name="AsyncServerError" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>50000</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="fitnessError"/>
+    </appender>
+
+    <logger name="org.springframework.context" additivity="false" level="WARN">
+        <appender-ref ref="AsyncServerInfo"/>
+    </logger>
+
+    <root level="${log.level}">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
